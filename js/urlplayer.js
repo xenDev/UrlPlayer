@@ -1,5 +1,6 @@
 var player;
 var currentUrl = '';
+var playList =[];
 
 $(function() {
   player = new CastPlayer();
@@ -49,15 +50,56 @@ function getContentType(url) {
   return "";
 }
 
-function startPlayback() {
-  if (player.session == null || $('#url').val().trim() == "") {
+function displayQueue() {
+    
+    if(playList.length == 0) {
+        $('#playlistarea').hide();
+        return;
+    }
+
+    var playListStr = "";
+
+    playListStr = playList.join("\r\n");
+
+    /* for(var i in playList) {
+            playListStr = playListStr + playList[i] + '\n';
+    }
+    */
+    $('#playlist').val(playListStr);
+    $('#playlistarea').show();
+
+}
+function addToQueue() {
+  if ($('#url').val().trim() == "") {
     return;
   }
-  var url = decodeURIComponent($('#url').val());
+  playList.push($('#url').val());
+  $('#url').val("");
+  displayQueue();
+}
+
+function startPlayback() {
+  var url;
+    
+  if (playList.length > 0) {
+    url = decodeURIComponent(playList.shift());      
+  } else {
+      if($('#url').val().trim() == "")
+        return;
+      url = decodeURIComponent($('#url').val());
+  }
+
+  if (player.session == null) {
+    return;
+  }
+
   var contentType = getContentType(url);
+  console.log("Playing media at " + url);
   player.loadMedia(url, contentType);
+  displayQueue();
   $('#player_now_playing').html(url.split(/[\\/]/).pop());
   $('#controls').show();
+
 }
 
 function pause() {

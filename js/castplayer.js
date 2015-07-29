@@ -85,8 +85,7 @@ CastPlayer.prototype.initializeCastPlayer = function() {
     if (this.tries++ > 10) {
       $('#extension').html("Looks like you don't have the Chromecast Extension. <a target=\"_blank\" href=\"https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd\">Click here to Install it</a> and then reload the page");
       return;
-    }
-    setTimeout(this.initializeCastPlayer.bind(this), 1000);
+    }setTimeout(this.initializeCastPlayer.bind(this), 1000);
     return;
   }
 
@@ -324,6 +323,9 @@ CastPlayer.prototype.onMediaStatusUpdate = function(e) {
   if( e == false ) {
     this.currentMediaTime = 0;
     this.castPlayerState = PLAYER_STATE.IDLE;
+    console.log("going to idle..playing next in the list");
+    // Send an event to URL player instead of doing this from here. HACK
+    startPlayback();
   }
   console.log("updating media");
 };

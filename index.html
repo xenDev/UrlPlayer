@@ -114,8 +114,18 @@
                 style="width: 800px;"
                 id="url"
                 placeholder="Enter or paste a URL to play a video or view an image on Chromecast" />
+                <button onclick="addToQueue();" id="add_queue" type="button" class="btn btn-primary">
+                <span class="glyphicon glyphicon-play"></span>
+                <span id="modal_playlist_text">Add to Playlist</span>
+              </button>
+                <div id="playlistarea" style="display: none">
+                <br>
+                    Playlist <br> 
+                    <textarea id="playlist" type="textbox" value="" style="width: 800px; height:auto; display:none"></textarea>
+                </div>
             </li>
             <li style="margin-bottom:10px;">
+              
               <button onclick="startPlayback();" id="modal_play" type="button" class="btn btn-primary">
                 <span class="glyphicon glyphicon-play"></span>
                 <span id="modal_play_text">Connect to Chromecast to Start Playback</span>
