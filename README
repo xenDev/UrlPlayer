@@ -2,7 +2,7 @@ Chromecast URL Player
 
 A simple web app to cast any video given its URL to Chromecast.
 
-A hosted version can be found here: http://movies.foamsnet.com/url
+A hosted version can be found here: http://xendev.github.io/UrlPlayer
 
 Features:
     * Playback any supported video from the web.
